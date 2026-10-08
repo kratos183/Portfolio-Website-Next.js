@@ -1,122 +1,235 @@
-import { Github, ExternalLink } from "lucide-react";
+import { Section, SectionHeading } from "./ui/Section";
 import { Reveal } from "./ui/Reveal";
+import { ArrowUpRight, Check, Lock } from "lucide-react";
+import { featuredProject, supportingProjects, type Project } from "../lib/projects";
+import { projectIcons } from "../lib/icons";
+import { cn } from "../lib/utils";
 
-export function Projects() {
-  const projects = [
-    {
-      title: "VOLTEX",
-      description: "Problem: E-commerce platforms struggle with complex state management and secure admin control. \n\nSolution: Built a full-stack platform featuring airtight JWT authentication, a dedicated role-based admin dashboard, and advanced, optimized product filtering. Designed to handle real-world transactions and large-scale inventory management seamlessly.",
-      techStack: ["Next.js", "Express", "MongoDB", "Node.js", "Tailwind CSS"],
-      liveUrl: "https://ecommerce-smoky-two-80.vercel.app/",
-      githubUrl: "https://github.com/kratos183",
-      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800",
-      altLayout: false,
-    },
-    {
-      title: "AI Pipeline Editor",
-      description: "Problem: Data scientists lack intuitive ways to piece together complex, multi-step AI workflows asynchronously. \n\nSolution: Engineered an interactive node-based visual editor for constructing Directed Acyclic Graphs (DAGs). Leverages React Flow for a complex drag-and-drop frontend and FastAPI for real-time edge validation and cycle detection.",
-      techStack: ["React Flow", "FastAPI", "Python", "Tailwind CSS"],
-      liveUrl: "#",
-      githubUrl: "https://github.com/kratos183",
-      image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=800",
-      altLayout: true,
-    },
-    {
-      title: "Task Management App",
-      description: "Problem: Teams face productivity loss due to disjointed workflows and unreliable data synchronization. \n\nSolution: Developed a robust RESTful architecture with a scalable MongoDB schema. Features highly optimized APIs with indexing, secure JWT-based auth, and an ultra-responsive frontend ensuring constant data reliability and zero downtime.",
-      techStack: ["React", "Express", "JWT", "REST API", "MongoDB"],
-      liveUrl: "#",
-      githubUrl: "https://github.com/kratos183",
-      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?auto=format&fit=crop&q=80&w=800",
-      altLayout: false,
-    },
-  ];
+function TechPills({ items }: { items: string[] }) {
+  return (
+    <ul className="flex flex-wrap gap-1.5">
+      {items.map((tech) => (
+        <li
+          key={tech}
+          className="rounded-md border border-border bg-surface px-2.5 py-1 font-mono text-[11px] font-medium tracking-tight text-muted transition-colors group-hover:border-border-strong group-hover:text-foreground-soft"
+        >
+          {tech}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function Highlights({ items, limit }: { items: string[]; limit?: number }) {
+  const shown = typeof limit === "number" ? items.slice(0, limit) : items;
+  const hidden = items.length - shown.length;
 
   return (
-    <section id="projects" className="py-24 bg-background relative overflow-hidden">
-      <div className="container mx-auto px-6 max-w-6xl">
-        <Reveal direction="up">
-          <div className="flex flex-col items-center justify-center mb-20 text-center">
-             <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">Projects</h2>
-             <div className="w-12 h-1 bg-brand-accent rounded-full" />
-             <p className="mt-6 text-muted max-w-2xl text-lg">
-               A showcase of complex applications I've built to solve real business problems, focusing on performance, scalability, and exceptional user experience.
-             </p>
+    <ul className="space-y-2.5">
+      {shown.map((point) => (
+        <li key={point} className="flex gap-3">
+          <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
+          <span className="text-sm leading-relaxed text-muted">{point}</span>
+        </li>
+      ))}
+      {hidden > 0 ? (
+        <li className="pl-7 font-mono text-xs uppercase tracking-[0.12em] text-faint">
+          +{hidden} more in the case study
+        </li>
+      ) : null}
+    </ul>
+  );
+}
+
+function Actions({ project }: { project: Project }) {
+  const Icon = projectIcons[project.slug];
+
+  if (project.liveIsPublic && project.liveUrl) {
+    return (
+      <a
+        href={project.liveUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group/link inline-flex h-10 items-center gap-2 rounded-lg bg-foreground px-4 text-sm font-medium text-background transition-all hover:bg-brand hover:shadow-lift"
+      >
+        <span
+          className={cn(
+            "transition-transform duration-300 group-hover/link:scale-110",
+            Icon ? "hidden sm:block" : "hidden",
+          )}
+        >
+          {Icon ? <Icon className="h-4 w-4" /> : null}
+        </span>
+        Live demo
+        <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+      </a>
+    );
+  }
+
+  return (
+    <span className="inline-flex h-10 cursor-default items-center gap-2 rounded-lg border border-border bg-surface px-4 text-sm font-medium text-muted">
+      <Lock className="h-4 w-4" />
+      Private build — APK on request
+    </span>
+  );
+}
+
+function MetricPanel({ project }: { project: Project }) {
+  if (!project.metrics) return null;
+
+  return (
+    <div
+      className={cn(
+        "flex flex-col justify-between rounded-2xl bg-gradient-to-br p-6 text-white",
+        project.tone.bar,
+      )}
+    >
+      <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/70">
+        By the numbers
+      </p>
+      <dl className="mt-6 grid grid-cols-2 gap-x-4 gap-y-5">
+        {project.metrics.map((m) => (
+          <div key={m.label}>
+            <dt className="text-2xl font-semibold tracking-tight md:text-3xl">
+              {m.value}
+            </dt>
+            <dd className="mt-1 text-xs leading-snug text-white/75">{m.label}</dd>
           </div>
-        </Reveal>
+        ))}
+      </dl>
+    </div>
+  );
+}
 
-        <div className="space-y-32">
-          {projects.map((project, idx) => (
-            <div
-              key={idx}
-              className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-20 ${
-                project.altLayout ? "lg:flex-row-reverse" : ""
-              }`}
+function FeaturedCard({ project }: { project: Project }) {
+  return (
+    <Reveal className="h-full">
+      <article className="group grid h-full gap-8 rounded-2xl border border-border bg-background p-7 shadow-card transition-all duration-400 hover:border-border-strong hover:shadow-lift md:p-9 lg:grid-cols-12 lg:gap-10">
+        <div className="lg:col-span-7">
+          <div className="flex items-center gap-3">
+            <span
+              className={cn(
+                "flex h-10 w-10 items-center justify-center rounded-lg ring-1",
+                project.tone.chip,
+              )}
             >
-              {/* Project Info */}
-              <div className="w-full lg:w-1/2 space-y-6">
-                <Reveal direction={project.altLayout ? "left" : "right"}>
-                  <h3 className="text-2xl md:text-3xl font-bold text-foreground">
-                    {project.title}
-                  </h3>
-                  
-                  <div className="flex flex-wrap gap-2 mt-4">
-                    {project.techStack.map((tech, i) => (
-                      <span
-                        key={i}
-                        className="px-3 py-1 bg-surface border border-border text-xs font-medium rounded-full text-muted tracking-wide uppercase"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+              {(() => {
+                const Icon = projectIcons[project.slug];
+                return Icon ? <Icon className="h-5 w-5" /> : null;
+              })()}
+            </span>
+            <p className="font-mono text-xs uppercase tracking-[0.16em] text-muted">
+              {project.kicker}
+            </p>
+          </div>
 
-                  <p className="mt-6 text-muted leading-relaxed text-lg whitespace-pre-wrap">
-                    {project.description}
-                  </p>
+          <h3 className="mt-5 text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
+            {project.name}
+          </h3>
+          <p className="mt-3 text-base leading-relaxed text-muted">
+            {project.summary}
+          </p>
 
-                  <div className="flex items-center gap-4 mt-8">
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-brand-accent text-white font-medium hover:bg-brand-accentHover transition-colors gap-2 shadow-lg shadow-brand-accent/20"
-                    >
-                      <Github className="w-5 h-5" />
-                      View Github
-                    </a>
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-surface border border-border text-foreground hover:bg-border transition-colors gap-2"
-                    >
-                      Live Demo
-                      <ExternalLink className="w-5 h-5" />
-                    </a>
-                  </div>
-                </Reveal>
-              </div>
+          <div className="mt-7">
+            <Highlights items={project.highlights} limit={4} />
+          </div>
 
-              {/* Project Image */}
-              <div className="w-full lg:w-1/2">
-                 <Reveal direction={project.altLayout ? "right" : "left"} delay={0.2}>
-                   <div className="relative group overflow-hidden rounded-2xl border border-border/50 bg-surface shadow-2xl transition-all hover:border-brand-accent/50 hover:shadow-brand-accent/10">
-                      {/* Image Glow */}
-                      <div className="absolute inset-0 bg-brand-accent opacity-0 group-hover:opacity-10 transition-opacity duration-500 z-10 pointer-events-none" />
-                      
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700 max-h-[400px]"
-                      />
-                   </div>
-                 </Reveal>
-              </div>
-            </div>
-          ))}
+          <div className="mt-7">
+            <TechPills items={project.tech} />
+          </div>
+
+          <div className="mt-8">
+            <Actions project={project} />
+          </div>
         </div>
+
+        <div className="lg:col-span-5">
+          <MetricPanel project={project} />
+        </div>
+      </article>
+    </Reveal>
+  );
+}
+
+function CompactCard({ project }: { project: Project }) {
+  return (
+    <Reveal className="h-full" delay={0.06}>
+      <article className="group flex h-full flex-col rounded-2xl border border-border bg-background p-6 shadow-card transition-all duration-400 hover:-translate-y-1 hover:border-border-strong hover:shadow-lift md:p-7">
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <span
+              className={cn(
+                "flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ring-1 transition-transform duration-400 group-hover:scale-110",
+                project.tone.chip,
+              )}
+            >
+              {(() => {
+                const Icon = projectIcons[project.slug];
+                return Icon ? <Icon className="h-5 w-5" /> : null;
+              })()}
+            </span>
+            <p className="font-mono text-[11px] uppercase leading-relaxed tracking-[0.14em] text-muted">
+              {project.kicker}
+            </p>
+          </div>
+        </div>
+
+        <h3 className="mt-5 text-xl font-semibold tracking-tight text-foreground">
+          {project.name}
+        </h3>
+        <p className="mt-2.5 text-sm leading-relaxed text-muted line-clamp-3">
+          {project.summary}
+        </p>
+
+        <div className="mt-5 flex-1">
+          <Highlights items={project.highlights} limit={2} />
+        </div>
+
+        {project.metrics ? (
+          <dl className="mt-6 grid grid-cols-2 gap-x-4 gap-y-3 border-y border-border py-4">
+            {project.metrics.map((m) => (
+              <div key={m.label} className="min-w-0">
+                <dt className="text-lg font-semibold tracking-tight text-foreground">
+                  {m.value}
+                </dt>
+                <dd className="mt-0.5 truncate text-[11px] text-faint">{m.label}</dd>
+              </div>
+            ))}
+          </dl>
+        ) : null}
+
+        <div className="mt-6">
+          <TechPills items={project.tech.slice(0, 6)} />
+        </div>
+
+        <div className="mt-6 pt-1">
+          <Actions project={project} />
+        </div>
+      </article>
+    </Reveal>
+  );
+}
+
+export function Projects() {
+  return (
+    <Section id="work" tone="surface">
+      <Reveal>
+        <SectionHeading
+          eyebrow="Selected work"
+          title="Five products, built and shipped."
+          description="Each of these is a working application with a real backend behind it — schemas, authorization, CI and deployment, not a front-end mock. Four are live and linked below."
+        />
+      </Reveal>
+
+      <div className="mt-14">
+        <FeaturedCard project={featuredProject} />
       </div>
-    </section>
+
+      <div className="mt-8 grid gap-8 md:grid-cols-2">
+        {supportingProjects.map((project) => (
+          <CompactCard key={project.slug} project={project} />
+        ))}
+      </div>
+    </Section>
   );
 }

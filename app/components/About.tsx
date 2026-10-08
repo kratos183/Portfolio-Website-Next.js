@@ -1,94 +1,101 @@
-import { Shield, Server, Box } from "lucide-react";
+import { Section, SectionHeading } from "./ui/Section";
 import { Reveal } from "./ui/Reveal";
+import { Database, ShieldCheck, GitPullRequestArrow, Layers } from "lucide-react";
+
+const principles = [
+  {
+    icon: Database,
+    title: "Schema before screens",
+    body: "I design the data model and its authorization rules first, then build the interface on top. It is faster than retrofitting either later.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Security at the boundary",
+    body: "Authorization belongs in the database and the edge, not in client-side checks that a user can simply bypass.",
+  },
+  {
+    icon: GitPullRequestArrow,
+    title: "Verification over opinion",
+    body: "Type checks, tests and CI gates catch what review misses. On one project those gates caught real bugs before merge.",
+  },
+  {
+    icon: Layers,
+    title: "Pick the boring tool",
+    body: "Postgres and Redis solve most problems well. I add Kafka, sharding or polyglot stores only when the requirement earns them.",
+  },
+];
 
 export function About() {
-  const strengths = [
-    {
-      title: "Authentication & Security",
-      description: "Implementing robust JWT and Role-Based Access Control (RBAC)",
-      icon: <Shield className="w-6 h-6 text-brand-accent" />,
-    },
-    {
-      title: "API Design & Backend",
-      description: "Building scalable RESTful APIs and connecting complex databases",
-      icon: <Server className="w-6 h-6 text-brand-accent" />,
-    },
-    {
-      title: "Modern Frontend",
-      description: "Leveraging Next.js App Router and SSR for ultimate performance",
-      icon: <Box className="w-6 h-6 text-brand-accent" />,
-    },
-  ];
-
-  const stats = [
-    { value: "3+", label: "Major Production Apps" },
-    { value: "100%", label: "Code Quality" },
-    { value: "5+", label: "Core Technologies" },
-  ];
-
   return (
-    <section id="about" className="py-24 bg-background relative overflow-hidden text-foreground">
-      {/* Subtle Background Gradient */}
-      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] bg-brand-accent/5 rounded-full blur-[120px] pointer-events-none" />
+    <Section id="about" tone="surface">
+      <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
+        <div className="lg:col-span-7">
+          <Reveal>
+            <SectionHeading
+              eyebrow="About"
+              title="I build systems end to end, and I own what I ship."
+            />
+          </Reveal>
 
-      <div className="container mx-auto px-6 max-w-6xl">
-        <Reveal direction="down">
-           <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-center mb-20">
-             About me
-           </h2>
-        </Reveal>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center relative z-10">
-          {/* Left: Strengths List */}
-          <div className="space-y-10 pl-4 border-l-2 border-border relative">
-            {/* Timeline line gradient */}
-            <div className="absolute left-[-2px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-brand-accent via-red-600 to-transparent opacity-50" />
-            
-            {strengths.map((strength, idx) => (
-              <Reveal key={idx} delay={idx * 0.2} direction="right">
-                <div className="relative">
-                  {/* Timeline dot */}
-                  <div className="absolute -left-[25px] top-1 w-3 h-3 bg-background border-2 border-brand-accent rounded-full z-10 shadow-[0_0_10px_rgba(249,115,22,0.8)]" />
-                  
-                  <div className="flex items-start gap-4 p-4 rounded-xl hover:bg-surface/50 border border-transparent hover:border-border transition-colors group">
-                    <div className="p-3 bg-surface rounded-lg group-hover:scale-110 transition-transform shadow-inner">
-                      {strength.icon}
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-semibold mb-2">{strength.title}</h3>
-                      <p className="text-muted leading-relaxed">{strength.description}</p>
-                    </div>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          {/* Right: Text and Stats */}
-          <div className="space-y-10">
-            <Reveal direction="left">
-               <p className="text-lg text-muted leading-relaxed pb-6 border-b border-border">
-                 I started my software journey with an obsession for how things work under the hood. Through that, I learned to love the process of building full-stack applications from scratch. Since then, it has led me to develop deep expertise in the MERN stack and Next.js, allowing me to build scalable, production-ready systems that solve real-world problems powerfully.
-               </p>
+          <div className="mt-8 space-y-5 text-base leading-relaxed text-muted md:text-lg">
+            <Reveal delay={0.05}>
+              <p>
+                I&apos;m a backend-focused engineer based in Dhanbad, India, working
+                across the stack. Most of my work starts the same way: a domain with
+                real rules in it — lending, learning, commerce, logistics — and a
+                schema that has to express those rules correctly before any screen
+                can be drawn.
+              </p>
             </Reveal>
-
-            <Reveal direction="up" delay={0.3}>
-               <div className="grid grid-cols-3 gap-6">
-                 {stats.map((stat, idx) => (
-                   <div key={idx} className="flex flex-col">
-                     <span className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-white to-neutral-400 mb-2">
-                       {stat.value}
-                     </span>
-                     <span className="text-sm text-neutral-500 uppercase tracking-wider font-medium">
-                       {stat.label}
-                     </span>
-                   </div>
-                 ))}
-               </div>
+            <Reveal delay={0.1}>
+              <p>
+                Over the last three years I&apos;ve delivered four full-stack
+                platforms and one React Native app, covering database design,
+                backend services, interfaces, CI pipelines and deployment. That
+                range is the point: I can take a requirement from an ambiguous brief
+                to a running, monitored system without waiting on a handoff.
+              </p>
+            </Reveal>
+            <Reveal delay={0.15}>
+              <p>
+                I care most about the parts that are unglamorous and expensive to
+                get wrong — authorization that actually holds, financial maths that
+                balances to the last rupee, migrations that run twice without
+                breaking, pipelines that fail loudly instead of silently. Where I
+                can, I encode those guarantees in tests and CI gates so they stay
+                true after I stop looking at them.
+              </p>
             </Reveal>
           </div>
         </div>
+
+        <div className="lg:col-span-5">
+          <Reveal direction="left" delay={0.1}>
+            <div className="rounded-2xl border border-border bg-background p-7 shadow-card">
+              <h3 className="font-mono text-xs font-medium uppercase tracking-[0.18em] text-brand">
+                How I work
+              </h3>
+              <ul className="mt-6 space-y-6">
+                {principles.map(({ icon: Icon, title, body }) => (
+                  <li key={title} className="flex gap-4">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-soft text-brand ring-1 ring-brand-ring">
+                      <Icon className="h-4 w-4" />
+                    </span>
+                    <div>
+                      <h4 className="text-sm font-semibold text-foreground">
+                        {title}
+                      </h4>
+                      <p className="mt-1.5 text-sm leading-relaxed text-muted">
+                        {body}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+        </div>
       </div>
-    </section>
+    </Section>
   );
 }

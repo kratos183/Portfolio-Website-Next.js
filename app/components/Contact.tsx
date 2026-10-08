@@ -1,106 +1,113 @@
-"use client";
-
-import { useState } from "react";
-import { Send } from "lucide-react";
+import { Section, SectionHeading } from "./ui/Section";
 import { Reveal } from "./ui/Reveal";
+import { ArrowUpRight, Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import { site } from "../lib/site";
+import { contactMeta } from "../lib/resume";
+
+const metaIcons = [Mail, Phone, MapPin, MapPin] as const;
+
+const socials = [
+  { label: "GitHub", href: site.links.github, icon: Github },
+  { label: "LinkedIn", href: site.links.linkedin, icon: Linkedin },
+  { label: "Email", href: site.links.email, icon: Mail },
+];
 
 export function Contact() {
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    // Simulate API call
-    setTimeout(() => {
-      setLoading(false);
-      setSuccess(true);
-      setTimeout(() => setSuccess(false), 3000);
-    }, 1500);
-  };
-
   return (
-    <section id="contact" className="py-24 bg-background relative border-t border-border">
-      {/* Decorative gradient */}
-      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-brand-accent/5 rounded-full blur-[150px] pointer-events-none" />
+    <Section id="contact" tone="surface">
+      <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
+        <div className="lg:col-span-7">
+          <Reveal>
+            <SectionHeading
+              eyebrow="Contact"
+              title="Open to remote backend and full-stack roles."
+            />
+          </Reveal>
 
-      <div className="container mx-auto px-6 max-w-6xl">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start relative z-10">
+          <Reveal delay={0.05}>
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-muted md:text-lg">
+              I&apos;m currently looking for a backend or full-stack position at a
+              company where the engineering is taken seriously — real code review,
+              real ownership, real consequences for what ships. If that sounds like
+              your team, I&apos;d like to talk.
+            </p>
+          </Reveal>
 
-          {/* Left: Text */}
-          <div className="space-y-6">
-            <Reveal direction="up">
-              <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-foreground">
-                Have a project?<br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-600">
-                  Let's talk!
-                </span>
-              </h2>
-              <p className="mt-4 text-muted max-w-md text-lg leading-relaxed">
-                Whether you're looking to build a new startup from scratch or improve an existing application, I'm here to help turn your ideas into a robust digital reality.
-              </p>
-            </Reveal>
-          </div>
+          <Reveal delay={0.1}>
+            <a
+              href={`mailto:${site.email}`}
+              className="group mt-8 inline-flex items-center gap-3 rounded-xl bg-foreground px-6 py-3.5 text-sm font-medium text-background transition-all hover:bg-brand hover:shadow-lift"
+            >
+              <Mail className="h-4 w-4" />
+              {site.email}
+              <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
+          </Reveal>
 
-          {/* Right: Form */}
-          <div>
-            <Reveal direction="up" delay={0.2}>
-              <form onSubmit={handleSubmit} className="space-y-6 bg-surface p-8 shadow-2xl rounded-2xl border border-border">
-
-                <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-medium text-muted pl-1">Name</label>
-                  <input
-                    id="name"
-                    type="text"
-                    required
-                    className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground placeholder-muted focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent transition-all"
-                    placeholder="John Doe"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium text-muted pl-1">Email</label>
-                  <input
-                    id="email"
-                    type="email"
-                    required
-                    className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground placeholder-muted focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent transition-all"
-                    placeholder="[EMAIL_ADDRESS]"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label htmlFor="message" className="text-sm font-medium text-muted pl-1">Message</label>
-                  <textarea
-                    id="message"
-                    required
-                    rows={4}
-                    className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground placeholder-muted focus:outline-none focus:ring-2 focus:ring-brand-accent/50 focus:border-brand-accent transition-all resize-none"
-                    placeholder="Tell me about your project..."
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full flex items-center justify-center py-4 rounded-lg bg-brand-accent text-white font-medium hover:bg-brand-accentHover transition-colors gap-2 disabled:opacity-70 shadow-lg shadow-brand-accent/20"
+          <Reveal delay={0.15}>
+            <div className="mt-8 flex flex-wrap gap-2.5">
+              {socials.map(({ label, href, icon: Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target={href.startsWith("mailto:") ? undefined : "_blank"}
+                  rel="noopener noreferrer"
+                  className="inline-flex h-10 items-center gap-2 rounded-lg border border-border bg-background px-4 text-sm font-medium text-foreground-soft transition-all hover:border-border-strong hover:bg-surface hover:text-foreground"
                 >
-                  {loading ? (
-                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  ) : success ? (
-                    "Message Sent!"
-                  ) : (
-                    <>
-                      Submit <Send className="w-5 h-5" />
-                    </>
-                  )}
-                </button>
-              </form>
-            </Reveal>
-          </div>
+                  <Icon className="h-4 w-4" />
+                  {label}
+                </a>
+              ))}
+            </div>
+          </Reveal>
+        </div>
 
+        <div className="lg:col-span-5">
+          <Reveal direction="left" delay={0.1}>
+            <dl className="overflow-hidden rounded-2xl border border-border bg-background shadow-card">
+              {contactMeta.map(({ label, value, href }, i) => {
+                const Icon = metaIcons[i] ?? MapPin;
+                const shell =
+                  `flex items-start gap-4 px-6 py-5 transition-colors ` +
+                  (i > 0 ? "border-t border-border " : "") +
+                  (href ? "hover:bg-surface" : "");
+                const inner = (
+                  <>
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-soft text-brand ring-1 ring-brand-ring">
+                      <Icon className="h-4 w-4" />
+                    </span>
+                    <div className="min-w-0">
+                      <dt className="font-mono text-[11px] uppercase tracking-[0.14em] text-faint">
+                        {label}
+                      </dt>
+                      <dd className="mt-1 break-words text-sm text-foreground-soft">
+                        {value}
+                      </dd>
+                    </div>
+                  </>
+                );
+
+                return href ? (
+                  <a
+                    key={label}
+                    href={href}
+                    {...(href.startsWith("http")
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : {})}
+                    className={shell}
+                  >
+                    {inner}
+                  </a>
+                ) : (
+                  <div key={label} className={shell}>
+                    {inner}
+                  </div>
+                );
+              })}
+            </dl>
+          </Reveal>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

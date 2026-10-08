@@ -1,0 +1,155 @@
+CHAND ANSARI
+Backend Engineer | Distributed Systems | Cloud Infrastructure
+Dhanbad, India | IST (UTC+5:30) | Open to Remote (US/EU overlap)
++91-7992430183 | chandansaricreative@gmail.com
+github.com/kratos183 | linkedin.com/in/chand-ansari-610348366
+
+SUMMARY
+Backend-focused engineer with 3+ years building production web applications and
+distributed systems. Shipped four full-stack products end to end -- a multi-portal
+loan origination platform, an AI-powered learning platform, an e-commerce suite with
+a real-time AI assistant, and a video streaming platform -- plus a React Native app
+for on-demand service booking. Experienced in containerised deployments (Docker),
+CI/CD automation (GitHub Actions) and cloud infrastructure on AWS, with industry
+experience at Nitecore Private Limited. Seeking a remote backend or full-stack role
+at a high-growth company.
+
+TECHNICAL SKILLS
+Backend & APIs: Node.js, Express.js, Fastify, Next.js Route Handlers, Next.js Server
+Actions, REST API Design, WebSockets (Socket.IO), JWT Auth, RBAC, Row-Level
+Security, Prisma, Python (FastAPI, Flask)
+Frontend: React.js, Next.js 14/16 (App Router, SSR, Proxy & Middleware), TypeScript,
+JavaScript (ES6+), Tailwind CSS, SWR
+Data & Infrastructure: PostgreSQL, Supabase, MongoDB, Mongoose, Redis, MySQL,
+Firebase, Indexing & Aggregation, Schema Design, Polyglot Persistence, Sharding
+Cloud & DevOps: Docker, Docker Compose, GitHub Actions CI/CD, AWS EC2, PM2, Nginx,
+SSL/TLS (Let's Encrypt), Linux, Vercel
+Mobile: React Native (Expo), TypeScript, React Navigation, EAS Build, AsyncStorage,
+Offline-first Design
+AI, Payments & Media: LangChain, RAG Pipelines, Vector Embeddings, Groq API, OpenAI
+SDK, Razorpay, Stripe, Cloudinary, Cloudflare R2
+Testing: Playwright (E2E), Unit Testing, Supertest, MongoDB Memory Server,
+React Testing Library, Jest
+
+EXPERIENCE
+
+Full Stack Developer | Nitecore Private Limited
+- Contributed to the development and delivery of production web applications as part
+  of an engineering team.
+
+Independent Software Engineer / Contract Developer | Self-Employed | 2022 - Present
+- Architected event-driven backend services using Apache Kafka for asynchronous order
+  processing and Redis for high-throughput caching, reducing database load by 40% and
+  improving API latency.
+- Containerised full-stack applications with Docker and automated zero-downtime
+  deployments via GitHub Actions CI/CD pipelines.
+- Designed and built RESTful APIs with strict input validation, pagination and
+  JWT-based RBAC middleware using Node.js, Express and Next.js.
+- Deployed production applications on AWS EC2 with an Nginx reverse proxy, SSL
+  termination via Let's Encrypt and PM2 process management.
+
+Full Stack Developer Intern | Aroha Technologies, Bangalore | Jan 2026 - Mar 2026
+- Built the full frontend and backend of a RAG-powered conversational AI with a
+  ChatGPT-style interface, streaming responses and persistent chat history.
+- Implemented end-to-end Firebase OAuth for Google and GitHub with MongoDB as the user
+  store, handling token exchange and secure profile persistence.
+- Owned the chat history module: designed MongoDB schemas, built paginated history
+  APIs and managed session-based context windows to optimise LLM token usage.
+- Collaborated in a cross-functional agile team to design API contracts, conduct code
+  reviews and ship features faster.
+
+SELECTED PROJECTS
+
+SafarLoan -- Loan Origination & Servicing Platform | Live
+Stack: Next.js 16, React 19, TypeScript, Supabase (PostgreSQL, Auth, RLS,
+Realtime), Tailwind CSS 4, Vercel
+- Built three role-gated portals (borrower, loan officer, admin) behind a single
+  Postgres database, covering origination through NOC release.
+- Designed a 26-table PostgreSQL schema with Row-Level Security across roughly 45
+  policies, using RLS rather than application filters as the authorization boundary.
+- Implemented a reducing-balance EMI engine with drift-corrected amortisation
+  schedules, dual-mode prepayment modelling and grace-period-aware late fees,
+  mirrored exactly in a SQL function and covered by a custom test harness.
+- Built an underwriting engine scoring applications across eight rules (FOIR, income,
+  amount, tenure, headroom, credit score, collateral cover, PAN), each returning
+  PASS/WARN/FAIL with actual-versus-required values.
+- Implemented two-tier delegated sanctioning that escalates approvals above an
+  officer's limit instead of silently approving, writing an audit row per decision.
+- Authored twelve custom Node scripts including a build-time environment guard, a
+  real PostgreSQL-parser migration check and a role-based HTTP smoke test, behind
+  four per-PR CI gates.
+
+EduPress -- AI-Powered Learning Management System | Live
+Stack: Next.js 16, React 19, TypeScript, PostgreSQL, MongoDB, Redis, Socket.IO,
+Razorpay, Cloudinary, Playwright, Docker
+- Built multi-role student, instructor and admin dashboards over a polyglot
+  persistence layer: PostgreSQL for relational course data, MongoDB for reviews, AI
+  conversations and sharded activity logs, Redis for caching, rate limits and queues.
+- Enforced role-based access twice -- edge route guarding in proxy.ts plus
+  cryptographic JWT verification on every API route, with roles read from
+  server-controlled app metadata.
+- Built HMAC-SHA256 verified Razorpay webhooks behind Redis idempotency locks, so
+  replayed payment events are detected and double-charging is impossible.
+- Moved certificate issuance onto an event-driven pipeline using a Redis Stream
+  consumed by a worker group.
+- Shipped an AI gateway with a Redis sliding-window rate limiter, request timeout,
+  four-model failover and response caching.
+- Wrote a Playwright authorization-contract suite proving that a forged session
+  cookie combined with a spoofed admin role cannot authorize a write.
+- Scaled horizontally with Docker Compose running three application instances behind
+  Nginx, deployed by a GitHub Actions build, test and deploy pipeline.
+
+VideoStream -- Full-Stack Video Streaming Platform | Live
+Stack: Next.js 14, React 18, MongoDB Atlas, Mongoose, Cloudinary, NextAuth.js,
+Tailwind CSS
+- Built a YouTube-style streaming platform with dynamic playback, category filtering,
+  full-text search and threaded comments across 15 REST API endpoints.
+- Streamed uploads directly to Cloudinary with real progress tracking and cancellable
+  transfers, generating thumbnails server-side from a URL transform with no disk
+  writes.
+- Designed four Mongoose schemas with ten strategic indexes, including a compound
+  text index for search and a unique compound index guaranteeing one watch-history row
+  per user and video pair.
+- Implemented threaded comments via a self-referencing parent reference with
+  parallelised reply hydration and cascading deletion.
+- Used atomic increments for view counters and idempotent add/remove operations for
+  likes and subscriptions, eliminating read-modify-write races.
+- Secured the platform with NextAuth.js JWT credentials auth, bcrypt password hashing
+  and two-tier viewer versus uploader gating.
+
+E-Commerce Platform -- Full-Stack with AI Shopping Assistant | Live
+Stack: Next.js 16, React 19, MongoDB, Razorpay, Grok-3 Mini (OpenAI SDK), JWT,
+Tailwind CSS 4
+- Architected a production storefront with dynamic catalogue browsing, cart
+  management, secure checkout and order tracking.
+- Integrated a streaming AI shopping assistant over ReadableStream, delivering
+  context-aware guidance at roughly 60% lower perceived latency than a buffered
+  response.
+- Implemented JWT sessions in HTTP-only cookies with bcrypt hashing and Next.js
+  middleware enforcing role-based access on admin and dashboard routes.
+- Integrated Razorpay with server-side signature verification, automated
+  order-status synchronisation and dual-mode cart sync for guest and authenticated
+  shoppers.
+
+KaamNow -- On-Demand Service Booking Mobile App
+Stack: React Native (Expo SDK 57), TypeScript, React Navigation, AsyncStorage,
+EAS Build
+- Built the complete on-demand booking funnel across twelve screens and ten routes:
+  browse, service detail, slot and worker selection, checkout, live tracking,
+  booking history and ratings.
+- Encoded a six-state booking lifecycle with timeline, per-status design tokens,
+  cancellation rules and rating eligibility as domain invariants in a single reducer.
+- Shipped a wallet with top-ups, a credit and debit ledger and rewards, plus a coupon
+  engine handling flat and percentage discounts with minimum-order gates and caps.
+- Kept every screen decoupled from transport behind a single AsyncStorage-backed
+  context, so replacing local persistence with a REST and WebSocket backend requires
+  no screen changes.
+- Wrote a zero-dependency PNG encoder in Node using zlib and CRC32 to generate app
+  icons, adaptive icons and splash assets from brand colours.
+- Released through EAS Build to both a sideloadable APK and a Play Store-ready AAB.
+
+EDUCATION
+
+Bachelor of Computer Applications (BCA)
+Noida International University, Noida, India | 2025 - Expected 2028
+Undergraduate, currently in progress.
