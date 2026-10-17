@@ -6,38 +6,47 @@ github.com/kratos183 | linkedin.com/in/chand-ansari-610348366
 
 SUMMARY
 Backend-focused engineer with 3+ years building production web applications and
-distributed systems. Shipped four full-stack products end to end -- a multi-portal
-loan origination platform, an AI-powered learning platform, an e-commerce suite with
-a real-time AI assistant, and a video streaming platform -- plus a React Native app
-for on-demand service booking. Experienced in containerised deployments (Docker),
-CI/CD automation (GitHub Actions) and cloud infrastructure on AWS, with industry
-experience at Nitecore Private Limited. Seeking a remote backend or full-stack role
-at a high-growth company.
+distributed systems. Shipped four full-stack products end to end -- a multi-tenant
+loan origination platform, an AI-powered LMS, an e-commerce suite with a
+retrieval-augmented AI assistant, and a video streaming platform -- plus a React
+Native mobile app for on-demand labour booking. Architected event-driven order
+pipelines using Apache Kafka and Redis, cutting database load by 40%. Experienced in
+containerised deployments (Docker), CI/CD automation (GitHub Actions) and cloud
+infrastructure on AWS, with industry experience at Nitecore Solutions Private
+Limited. Seeking a remote backend or full-stack role at a high-growth company.
 
 TECHNICAL SKILLS
-Backend & APIs: Node.js, Express.js, Fastify, Next.js Route Handlers, Next.js Server
-Actions, REST API Design, WebSockets (Socket.IO), JWT Auth, RBAC, Row-Level
-Security, Prisma, Python (FastAPI, Flask)
-Frontend: React.js, Next.js 14/16 (App Router, SSR, Proxy & Middleware), TypeScript,
-JavaScript (ES6+), Tailwind CSS, SWR
-Data & Infrastructure: PostgreSQL, Supabase, MongoDB, Mongoose, Redis, MySQL,
-Firebase, Indexing & Aggregation, Schema Design, Polyglot Persistence, Sharding
-Cloud & DevOps: Docker, Docker Compose, GitHub Actions CI/CD, AWS EC2, PM2, Nginx,
+Backend & Messaging: Node.js, Express.js, Fastify, Python (FastAPI, Flask), Prisma,
+Next.js API Routes, Apache Kafka, Redis, REST API Design, WebSockets (Socket.IO),
+JWT Auth, RBAC, Multi-tenancy, Row-Level Security
+DevOps & Cloud: Docker, Docker Compose, GitHub Actions CI/CD, AWS EC2, PM2, Nginx,
 SSL/TLS (Let's Encrypt), Linux, Vercel
+Frontend: React.js, Next.js 14/16 (App Router, SSR, Middleware), TypeScript,
+JavaScript (ES6+), Tailwind CSS, SWR
 Mobile: React Native (Expo), TypeScript, React Navigation, EAS Build, AsyncStorage,
 Offline-first Design
-AI, Payments & Media: LangChain, RAG Pipelines, Vector Embeddings, Groq API, OpenAI
-SDK, Razorpay, Stripe, Cloudinary, Cloudflare R2
-Testing: Playwright (E2E), Unit Testing, Supertest, MongoDB Memory Server,
-React Testing Library, Jest
+Databases: MongoDB (Mongoose, indexing, aggregation), PostgreSQL (Supabase, Prisma),
+MySQL, Firebase, ChromaDB
+AI/ML & Media: LangChain, RAG Pipelines, Vector Embeddings, Groq API, OpenAI SDK,
+HuggingFace, Cloudinary, Cloudflare R2
+Payments & Testing: Razorpay, Stripe, Jest, React Testing Library, Supertest,
+MongoDB Memory Server, Playwright
 
 EXPERIENCE
 
-Full Stack Developer | Nitecore Private Limited
-- Contributed to the development and delivery of production web applications as part
-  of an engineering team.
+Full Stack Developer | Nitecore Solutions Private Limited | Present
+- Building and shipping production e-commerce websites for clients -- product
+  catalogues, cart and checkout flows, and order management -- using Next.js,
+  Node.js and MongoDB/PostgreSQL.
+- Developing LMS platforms with live class capabilities -- video lesson delivery,
+  class scheduling and student dashboards -- for online education clients.
+- Owning features end-to-end across the stack: REST API design, authentication and
+  role-based access control, and deployment to production.
+- Shipped additional client work -- company websites with blogs, landing pages and
+  utility tools such as a browser-based PDF editor -- with SEO-ready structure,
+  fully responsive layouts and fast load times.
 
-Independent Software Engineer / Contract Developer | Self-Employed | 2022 - Present
+Independent Software Engineer / Contract Developer | Self-Employed | 2022 - 2025
 - Architected event-driven backend services using Apache Kafka for asynchronous order
   processing and Redis for high-throughput caching, reducing database load by 40% and
   improving API latency.
@@ -99,6 +108,22 @@ Razorpay, Cloudinary, Playwright, Docker
 - Scaled horizontally with Docker Compose running three application instances behind
   Nginx, deployed by a GitHub Actions build, test and deploy pipeline.
 
+Ecommerce -- Electronics Storefront with RAG AI Assistant | Live
+Stack: Next.js 16, Supabase (PostgreSQL, pgvector), Groq, Razorpay, Tailwind CSS
+- Architected a production electronics storefront on Next.js 16 and Supabase with a
+  faceted catalogue and Razorpay plus COD checkout, computing all pricing
+  server-side in Postgres so a tampered client cannot set its own totals.
+- Designed a RAG shopping assistant on local bge-small embeddings -- no external model
+  API, no per-request cost, no data leaving the machine -- using pgvector hybrid
+  search that fuses vector and full-text results via Reciprocal Rank Fusion, with
+  answers generated by Groq.
+- Solved personal-data isolation by never embedding customer orders: they are fetched
+  per request and scoped to the session user, making cross-customer leakage
+  structurally impossible rather than merely filtered.
+- Moved all money handling into atomic SECURITY DEFINER Postgres functions, with a
+  149-product catalogue generated deterministically from source and three test suites
+  running against a real in-process Postgres.
+
 VideoStream -- Full-Stack Video Streaming Platform | Live
 Stack: Next.js 14, React 18, MongoDB Atlas, Mongoose, Cloudinary, NextAuth.js,
 Tailwind CSS
@@ -116,20 +141,6 @@ Tailwind CSS
   likes and subscriptions, eliminating read-modify-write races.
 - Secured the platform with NextAuth.js JWT credentials auth, bcrypt password hashing
   and two-tier viewer versus uploader gating.
-
-E-Commerce Platform -- Full-Stack with AI Shopping Assistant | Live
-Stack: Next.js 16, React 19, MongoDB, Razorpay, Grok-3 Mini (OpenAI SDK), JWT,
-Tailwind CSS 4
-- Architected a production storefront with dynamic catalogue browsing, cart
-  management, secure checkout and order tracking.
-- Integrated a streaming AI shopping assistant over ReadableStream, delivering
-  context-aware guidance at roughly 60% lower perceived latency than a buffered
-  response.
-- Implemented JWT sessions in HTTP-only cookies with bcrypt hashing and Next.js
-  middleware enforcing role-based access on admin and dashboard routes.
-- Integrated Razorpay with server-side signature verification, automated
-  order-status synchronisation and dual-mode cart sync for guest and authenticated
-  shoppers.
 
 KaamNow -- On-Demand Service Booking Mobile App
 Stack: React Native (Expo SDK 57), TypeScript, React Navigation, AsyncStorage,

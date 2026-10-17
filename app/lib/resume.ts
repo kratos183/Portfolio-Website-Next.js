@@ -1,5 +1,8 @@
 import { site } from "./site";
 
+/** Long-form professional summary used on the printable résumé. */
+export const summaryText = `Backend-focused engineer with 3+ years building production web applications and distributed systems. Shipped four full-stack products end-to-end — a multi-tenant loan origination platform, an AI-powered LMS, an e-commerce suite with a retrieval-augmented AI assistant, and a video streaming platform — plus a React Native mobile app for on-demand labour booking. Architected event-driven order pipelines using Apache Kafka and Redis, cutting database load by 40%. Experienced in containerised deployments (Docker), CI/CD automation (GitHub Actions) and cloud infrastructure on AWS, with industry experience at Nitecore Solutions Private Limited. Seeking a remote backend or full-stack role at a high-growth company.`;
+
 export type SkillGroup = { label: string; items: string[] };
 
 export const skillGroups: SkillGroup[] = [
@@ -125,15 +128,19 @@ export type Experience = {
 export const experience: Experience[] = [
   {
     role: "Full Stack Developer",
-    org: "Nitecore Private Limited",
+    org: "Nitecore Solutions Private Limited",
+    period: "Present",
     points: [
-      "Contributed to the development and delivery of production web applications as part of an engineering team.",
+      "Building and shipping production e-commerce websites for clients — product catalogues, cart and checkout flows, and order management — using Next.js, Node.js and MongoDB/PostgreSQL.",
+      "Developing LMS platforms with live class capabilities — video lesson delivery, class scheduling and student dashboards — for online education clients.",
+      "Owning features end-to-end across the stack: REST API design, authentication and role-based access control, and deployment to production.",
+      "Shipped additional client work — company websites with blogs, landing pages and utility tools such as a browser-based PDF editor — with SEO-ready structure, fully responsive layouts and fast load times.",
     ],
   },
   {
     role: "Independent Software Engineer / Contract Developer",
     org: "Self-Employed",
-    period: "2022 – Present",
+    period: "2022 – 2025",
     points: [
       "Architected event-driven backend services using Apache Kafka for asynchronous order processing and Redis for high-throughput caching, reducing database load by 40% and improving API latency.",
       "Containerised full-stack applications with Docker and automated zero-downtime deployments via GitHub Actions CI/CD pipelines.",

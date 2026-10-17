@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, Download, Mail, MapPin, Phone } from "lucide-react";
 import { PrintButton } from "../components/PrintButton";
 import { site } from "../lib/site";
-import { education, experience, skillGroups } from "../lib/resume";
+import { education, experience, skillGroups, summaryText } from "../lib/resume";
 import { projects } from "../lib/projects";
 
 export const metadata: Metadata = {
@@ -97,15 +97,7 @@ export default function ResumePage() {
         <section className="mt-8">
           <SectionTitle>Summary</SectionTitle>
           <p className="mt-3 text-sm leading-relaxed text-foreground-soft">
-            Backend-focused engineer with 3+ years building production web
-            applications and distributed systems. Shipped four full-stack products
-            end to end — a multi-portal loan origination platform, an AI-powered
-            learning platform, an e-commerce suite with a real-time AI assistant,
-            and a video streaming platform — plus a React Native app for on-demand
-            service booking. Experienced in containerised deployments (Docker),
-            CI/CD automation (GitHub Actions) and cloud infrastructure on AWS, with
-            industry experience at Nitecore Private Limited. Seeking a remote
-            backend or full-stack role at a high-growth company.
+            {summaryText}
           </p>
         </section>
 

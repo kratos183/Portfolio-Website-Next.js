@@ -8,7 +8,7 @@ export const site = {
   phone: "+91-7992430183",
   availability: "Open to Remote — US/EU overlap",
   summary:
-    "Backend-focused engineer building production web platforms and distributed systems. Shipped four full-stack products end to end — a role-gated loan origination platform, an AI-powered learning platform, a video streaming service and an e-commerce suite — plus a React Native booking app. Comfortable owning a system from schema design through deployment, CI and observability.",
+    "Backend-focused engineer with 3+ years building production web applications and distributed systems. Shipped four full-stack products end to end — a multi-tenant loan origination platform, an AI-powered learning platform, a RAG-assisted e-commerce storefront, and a video streaming platform — plus a React Native app for on-demand labour booking. Currently building production e-commerce and LMS platforms for clients at Nitecore Solutions Private Limited.",
   links: {
     github: "https://github.com/kratos183",
     linkedin: "https://www.linkedin.com/in/chand-ansari-610348366/",
